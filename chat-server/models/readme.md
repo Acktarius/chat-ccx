@@ -1,0 +1,1 @@
+*Place your model with gguf extension in this folder*

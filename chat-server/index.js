@@ -9,7 +9,7 @@ import {LlamaModel, LlamaContext, LlamaChatSession, EmptyChatPromptWrapper} from
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const model = new LlamaModel({
-    modelPath: path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_Q8.gguf")
+    modelPath: path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_Q8.gguf") //adjust file model name as needed.
 });
 
 
