@@ -6,7 +6,8 @@ WIP project, operational in development, follow those step to try it out.
 ---
 
 ## Dependencies required
-nodejs, npm
+nodejs, npm, kill-port
+`npm install --global kill-port`  
 
 ## Step 1
 Download the Model from hugging face :
@@ -28,5 +29,5 @@ in chat-react folder
 
 
 ## Step 4
-in your browser:
-`http://localhost:5173/`  
+in your browser:  
+`http://localhost:4173/`  

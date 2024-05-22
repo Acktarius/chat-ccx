@@ -4,12 +4,44 @@ import { Server } from "socket.io";
 import {fileURLToPath} from "url";
 import path from "path";
 import cors from 'cors';
+import {downloadFile} from 'ipull';
+import { access, constants } from 'node:fs';
 import {LlamaModel, LlamaContext, LlamaChatSession, EmptyChatPromptWrapper} from "node-llama-cpp";
 // Model access and setup
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+
+
+const checkmodel = path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_2_Q8.gguf");
+
+// Check if the file exists in the current directory.
+access(checkmodel, constants.F_OK, async (err) => {
+  //console.log(`${checkmodel} ${err ? 'does not exist' : 'exists'}`);
+    if (err) {
+        try {
+        //Downloading model
+        const downloader = await downloadFile({
+        url: 'https://huggingface.co/Acktarius/open_llama_3b_v2-w-loraCCX_2_Q8.gguf/resolve/main/open_llama_3b_v2-w-loraCCX_2_Q8.gguf?download=true',
+        directory: './models',
+        skipExisting: true,
+        cliProgress: true
+        });
+
+        setTimeout(() => {
+        downloader.closeAndDeleteFile();
+        }, 500000);
+
+        await downloader.download();
+    } catch (error) { 
+        console.error;
+    }
+    }
+});
+
+
+
 const model = new LlamaModel({
-    modelPath: path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_Q8.gguf") //adjust file model name as needed.
+    modelPath: path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_2_Q8.gguf") //adjust file model name as needed.
 });
 
 
@@ -44,7 +76,7 @@ io.on("connection", (soc) => {
     });
   });
 
-const PORT = process.env.PORT || 8080 
+const PORT = process.env.PORT || 8080
 
 httpServer.listen(PORT, () => {
     console.log("server started on port %d", PORT)
