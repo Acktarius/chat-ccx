@@ -48,4 +48,5 @@ cd $wdir
 npm exec electron ./electron/main.js
 
 #cleanup
-npx kill-port 8080 4173
+npx kill-port 8080
+npx kill-port 4173

@@ -11,12 +11,13 @@ import {LlamaModel, LlamaContext, LlamaChatSession, EmptyChatPromptWrapper} from
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
-
-const checkmodel = path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_2_Q8.gguf");
+ /*
+const checkmodel = path.join(__dirname, "..", "models", "open_llama_3b_v2-w-loraCCX_2_Q8.gguf");
 
 // Check if the file exists in the current directory.
 access(checkmodel, constants.F_OK, async (err) => {
   //console.log(`${checkmodel} ${err ? 'does not exist' : 'exists'}`);
+ 
     if (err) {
         try {
         //Downloading model
@@ -37,7 +38,24 @@ access(checkmodel, constants.F_OK, async (err) => {
     }
     }
 });
+*/
+try {
+    //Downloading model
+    const downloader = await downloadFile({
+    url: 'https://huggingface.co/Acktarius/open_llama_3b_v2-w-loraCCX_2_Q8.gguf/resolve/main/open_llama_3b_v2-w-loraCCX_2_Q8.gguf?download=true',
+    directory: './models',
+    skipExisting: true,
+    cliProgress: true
+    });
 
+    setTimeout(() => {
+    downloader.closeAndDeleteFile();
+    }, 500000);
+
+    await downloader.download();
+} catch (error) { 
+    console.error;
+}
 
 
 const model = new LlamaModel({
