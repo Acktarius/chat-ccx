@@ -59,6 +59,7 @@ fi
 ## npm
 cd ${path}/chat-react
 npm install
+npm run build
 cd ${path}/chat-server
 npm install
 cd ..
