@@ -6,6 +6,13 @@
 
 #declaration
 wdir=$PWD
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+MODEL_DIR="${SCRIPT_DIR%/*}/chat-server/models"
+SERVER_DIR="${SCRIPT_DIR%/*}/chat-server"
+REACT_DIR="${SCRIPT_DIR%/*}/chat-react"
+ELECTRON_DIR="${SCRIPT_DIR%/*}/electron"
+
+echo $MODEL_DIR
 
 #functions
 #trip
@@ -22,7 +29,7 @@ fi
 
 
 #main
-if [[ ! -f ./chat-server/models/open_llama_3b_v2-w-loraCCX_2_Q8.gguf ]]; then
+if [[ ! -f ${MODEL_DIR}/open_llama_3b_v2-w-loraCCX_2_Q8.gguf ]]; then
    if zenity --question --title="Download model ?" --text="model not detected, would you like to download it ?\n\n(patience is required)" --ok-label="Download" --cancel-label="Exit"; then
     echo "moving on"
     else
@@ -32,21 +39,20 @@ fi
 
 set -e
 # Start chat Model server
-cd chat-server
+cd ${SERVER_DIR}
 node index.js &
 chatServerPID=$!
 
-cd $wdir
+#cd $wdir
 # Start chat react server
-cd chat-react
+cd ${REACT_DIR}
 npm run preview &
 chatReactPID=$!
 
-cd $wdir
-
 #Open Electron
-npm exec electron ./electron/main.js
+cd ${ELECTRON_DIR}
+npm exec electron main.js
 
 #cleanup
-npx kill-port 8080
+npx kill-port 8080 &
 npx kill-port 4173

@@ -47,11 +47,11 @@ try {
     skipExisting: true,
     cliProgress: true
     });
-
+/*
     setTimeout(() => {
     downloader.closeAndDeleteFile();
-    }, 500000);
-
+    }, 240000);
+*/
     await downloader.download();
 } catch (error) { 
     console.error;
