@@ -30,12 +30,12 @@ and move the file in the folder /chat-server/models/
 
 ### Step 2
 in **chat-server** folder, modify index.js to reflect the downloaded model.  
-ie: `modelPath: path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_2_Q8.gguf")`
+ie: `modelPath: path.join(__dirname, "models", "open_llama_3b_v2-w-loraCCX_2_Q8.gguf")`  
 
 `npm install`  
 
 ### Step 3
-in **chat-react** folder
+in **chat-react** folder  
 `npm install`  
 `npm run build `  
 
