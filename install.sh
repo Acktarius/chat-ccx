@@ -63,5 +63,5 @@ cd ${path}/chat-server
 npm install
 cd ..
 ## other dep
-npm install -g electron -y
-npm install -g kill-port -y
+sudo npm install -g electron -y
+sudo npm install -g kill-port -y
